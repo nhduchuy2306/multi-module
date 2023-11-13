@@ -35,21 +35,21 @@ public class StudentRepositoryTest {
     }
 
     @Test
-    public void getAllStudents() {
+    public void testGetAllStudents() {
         var res = studentRepository.findAll();
         logger.info("---------------------------------------Result:" +  res);
         assert res.size() > 0;
     }
 
     @Test
-    public void getStudentByName(){
+    public void testGetStudentByName(){
         String name = "name1";
         var res = studentRepository.findByName(name);
         assert res.isPresent();
     }
 
     @Test
-    public void saveStudent(){
+    public void testSaveStudent(){
         UUID id = UUID.randomUUID();
         Student student = new Student(id, "name3", "email3", "password3", "phone3", "address3");
         studentRepository.save(student);
