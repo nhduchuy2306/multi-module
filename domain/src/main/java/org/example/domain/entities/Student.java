@@ -2,6 +2,7 @@ package org.example.domain.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Where;
 
@@ -17,6 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "student")
 @Where(clause = "is_deleted = false")
+@EqualsAndHashCode(callSuper = true)
 @AttributeOverride(name = "id", column = @Column(name = "student_id"))
 public class Student extends BaseEntity {
     @Column(name = "student_name")
