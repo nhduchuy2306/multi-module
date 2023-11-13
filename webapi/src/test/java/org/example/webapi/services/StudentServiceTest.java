@@ -24,9 +24,9 @@ public class StudentServiceTest {
     private StudentService studentService;
 
     @Before
-    public void init() {
-        studentRepository.save(new Student(UUID.randomUUID(), "name", "email", "password", "phone", "address"));
-        studentRepository.save(new Student(UUID.randomUUID(), "name", "email", "password", "phone", "address"));
+    public void setUp() {
+        studentRepository.save(new Student(UUID.randomUUID(), "name1", "email1", "password1", "phone1", "address1"));
+        studentRepository.save(new Student(UUID.randomUUID(), "name2", "email2", "password2", "phone2", "address2"));
     }
 
     @Test
