@@ -23,7 +23,6 @@ public class StudentRepositoryTest {
 
     @Autowired
     private StudentRepository studentRepository;
-
     @Autowired
     private EntityManager em;
 

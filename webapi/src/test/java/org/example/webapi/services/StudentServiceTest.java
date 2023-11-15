@@ -24,17 +24,15 @@ public class StudentServiceTest {
 
     @MockBean
     private StudentRepository studentRepository;
-
     @Autowired
     private StudentService studentService;
 
-    private final List<Student> students = new ArrayList<>(List.of(
-            new Student(UUID.randomUUID(), "name1", "email1", "password1", "phone1", "address1"),
-            new Student(UUID.randomUUID(), "name2", "email2", "password2", "phone2", "address2"))
-    );
-
     @Before
     public void setUp() {
+        final List<Student> students = new ArrayList<>(List.of(
+                new Student(UUID.randomUUID(), "name1", "email1", "password1", "phone1", "address1"),
+                new Student(UUID.randomUUID(), "name2", "email2", "password2", "phone2", "address2"))
+        );
         when(studentRepository.findAll()).thenReturn(students);
     }
 
