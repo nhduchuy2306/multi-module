@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/student")
+@RequestMapping("/api/students")
 public class StudentController {
     private final StudentService studentService;
 
@@ -21,5 +21,10 @@ public class StudentController {
     public ResponseEntity<?> getAllStudents() {
         System.out.println(studentService);
         return ResponseEntity.ok(studentService.getAllStudents());
+    }
+
+    @GetMapping("/custom")
+    public ResponseEntity<?> getAllStudentsCustom() {
+        return ResponseEntity.ok(studentService.getAllStudentsCustom());
     }
 }

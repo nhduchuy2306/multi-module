@@ -8,13 +8,14 @@ import org.example.webapi.WebapiApplication;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.persistence.EntityManager;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {WebapiApplication.class})
@@ -26,7 +27,7 @@ public class StudentRepositoryTest {
     @Autowired
     private EntityManager em;
 
-    private Logger logger = Logger.getLogger(StudentRepositoryTest.class.getName());
+    private final Logger LOG = LoggerFactory.getLogger(StudentRepositoryTest.class);
 
     @Before
     public void setUp() {
@@ -35,21 +36,7 @@ public class StudentRepositoryTest {
     }
 
     @Test
-    public void testGetAllStudents() {
-        var res = studentRepository.findAll();
-        logger.info("---------------------------------------Result:" +  res);
-        assert res.size() > 0;
-    }
-
-    @Test
-    public void testGetStudentByName(){
-        String name = "name1";
-        var res = studentRepository.findByName(name);
-        assert res.isPresent();
-    }
-
-    @Test
-    public void testSaveStudent(){
+    public void testSaveStudent() {
         UUID id = UUID.randomUUID();
         Student student = new Student(id, "name3", "email3", "password3", "phone3", "address3");
         studentRepository.save(student);
@@ -60,5 +47,22 @@ public class StudentRepositoryTest {
                 .fetchFirst();
 
         assert findRes != null;
+    }
+
+    @Test
+    public void testGetAllStudents() {
+        var res = studentRepository.findAll();
+        LOG.debug("Response : {}", res);
+        assert res.size() > 0;
+    }
+
+    @Test
+    public void testGetStudentByName() {
+        final String NAME = "name4";
+        Student res = new JPAQuery<Student>(em)
+                .from(QStudent.student)
+                .where(QStudent.student.name.eq(NAME))
+                .fetchFirst();
+        assert res != null;
     }
 }

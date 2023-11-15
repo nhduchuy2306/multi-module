@@ -1,15 +1,14 @@
-package org.example.infrastructure.customs.impl;
+package org.example.infrastructure.repositories.customs.impl;
 
 import com.querydsl.jpa.impl.JPAQuery;
 import org.example.domain.entities.QStudent;
 import org.example.domain.entities.Student;
-import org.example.infrastructure.customs.StudentRepositoryCustom;
-import org.springframework.stereotype.Component;
+import org.example.infrastructure.repositories.customs.StudentRepositoryCustom;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
-@Component
 public class StudentRepositoryImpl implements StudentRepositoryCustom {
 
     @PersistenceContext
@@ -22,5 +21,13 @@ public class StudentRepositoryImpl implements StudentRepositoryCustom {
                 .from(QStudent.student)
                 .where(QStudent.student.name.eq(firstName))
                 .fetchOne();
+    }
+
+    @Override
+    public List<Student> findAllStudentCustom() {
+        return new JPAQuery<Student>(em)
+                .select(QStudent.student)
+                .from(QStudent.student)
+                .fetch();
     }
 }
