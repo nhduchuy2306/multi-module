@@ -1,4 +1,4 @@
-package org.example.webapi.controller;
+package org.example.webapi.controllers;
 
 import org.example.application.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
